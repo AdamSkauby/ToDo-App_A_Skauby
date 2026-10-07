@@ -42,4 +42,49 @@ export default function App() { // Exporterar App-komponenten som default, så d
 			currentTasks.filter((task) => task.id !== taskId), // Loopar igenom alla uppgifter och returnerar endast de som inte matchar taskId
 		);
 	}
-}	 // Stänger funktionen App för strunden - men den skall eg. stängas i slutet, efter att all kod  är skriven - GLÖM INTE ÄNDRA!
+
+  return (
+    <main className="todo-app"> {/* Huvudkomponenten för appen */}
+      <h1>Att göra-lista</h1>
+
+      {/* Formuläret för att lägga till en ny uppgift. När användaren skickar in formuläret körs addTask-funktionen. */}
+      <form className="todo-form" onSubmit={addTask}> {/* Formuläret har en onSubmit-händelse som kör addTask-funktionen när användaren klickar på "Lägg till"-knappen */}
+        <label htmlForm="new-task">Ny uppgift </label>
+        <input
+          id="new-task" // Sätter id på inmatningsfältet, så etiketten kan kopplas till det
+          type="text" // Sätter typen på inmatningsfältet till text
+          value={inputText} // Sätter värdet på inmatningsfältet till inputText, så det uppdateras när anv. skriver
+          onChange={(event) => setInputText(event.target.value)} // När anv. skriver i inmatningsfältet uppdateras inputText med det nya värdet
+          placeholder="Att göra..." // Sätter en placeholder i inmatningsfältet, så anv. vet vad som ska skrivas in
+        />
+        <button type="submit">Lägg till</button> {/*Knappen skickar in formuläret, vilket kör addTask-funktionen*/}
+      </form>
+
+
+      {/* Listan skapas från state och uppdateras automatiskt när state ändras. */}
+      <ul className="todo-list"> {/* Listan med alla uppg. Varje uppg. renderas som ett li-element med en checkbox och en raderingsknapp */}
+        {tasks.map((task) => ( // Loopar igenom alla uppgifter i tasks och renderar dem som li-element
+          <li
+            className={`todo-item${task.completed ? " completed" : ""}`} // Om uppgiften är slutförd, lägg till klassen "completed" för att ändra utseendet
+            key={task.id} // Sätter ett unikt key-attribut på varje li-element, så React kan hålla reda på dem när de uppdateras
+          >
+            {/* Checkboxen ändrar status för just denna uppgift. */}
+            <label> {/* Label-elementet används för att koppla checkboxen till uppgiftens text, så användaren kan klicka på texten för att markera uppgiften som slutförd */}
+              <input
+                type="checkbox" // Sätter typen på input-elementet till checkbox
+                checked={task.completed} // Sätter checkboxen som markerad om uppgiften är slutförd
+                onChange={() => toggleTask(task.id)} // När användaren klickar på checkboxen körs toggleTask-funktionen med uppgiftens id som argum.
+              />
+              <span>{task.text}</span> {/* Visar uppgiftens text bredvid checkboxen */}
+            </label>
+
+            {/* Raderingsknappen använder uppgiftens id, så övriga lämnas orörda. */}
+            <button type="button" onClick={() => deleteTask(task.id)}> {/* Knappen kör deleteTask-funktionen med uppgiftens id som argum. när anv. klickar på den */}
+              Radera
+            </button>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}
