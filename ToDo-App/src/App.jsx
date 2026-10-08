@@ -49,7 +49,6 @@ export default function App() { // Exporterar App-komponenten som default, så d
 
       {/* Formuläret för att lägga till en ny uppgift. När användaren skickar in formuläret körs addTask-funktionen. */}
       <form className="todo-form" onSubmit={addTask}> {/* Formuläret har en onSubmit-händelse som kör addTask-funktionen när användaren klickar på "Lägg till"-knappen */}
-        <label htmlForm="new-task">Ny uppgift </label>
         <input
           id="new-task" // Sätter id på inmatningsfältet, så etiketten kan kopplas till det
           type="text" // Sätter typen på inmatningsfältet till text
