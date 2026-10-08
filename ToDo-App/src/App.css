@@ -1,12 +1,4 @@
-/* Laddar in de handskrivna fonterna från projektets assets-mapp.Ta bort ej använda när bestämt 1-2 st. */
-@font-face {
-  font-family: "Schoolbell";
-  src: url("./assets/Schoolbell.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
+/* Laddar in de handskrivna fonterna från projektets assets-mapp som jag valt att använda. */
 @font-face {
   font-family: "Rock Salt";
   src: url("./assets/RockSalt.ttf") format("truetype");
@@ -14,13 +6,7 @@
   font-weight: 400;
   font-display: swap;
 }
-@font-face {
-  font-family: "Scapholene";
-  src: url("./assets/Scapholene.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
+
 @font-face {
   font-family: "Permanent Marker";
   src: url("./assets/PermanentMarker.ttf") format("truetype");
