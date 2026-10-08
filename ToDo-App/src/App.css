@@ -1,184 +1,226 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* Laddar in de handskrivna fonterna från projektets assets-mapp.Ta bort ej använda när bestämt 1-2 st. */
+@font-face {
+  font-family: "Schoolbell";
+  src: url("./assets/Schoolbell.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+@font-face {
+  font-family: "Rock Salt";
+  src: url("./assets/RockSalt.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Scapholene";
+  src: url("./assets/Scapholene.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Permanent Marker";
+  src: url("./assets/PermanentMarker.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+/* Gör så att padding och kantlinjer räknas med i elementens totala bredd. */
+* {
+  box-sizing: border-box;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+/* Grundutseende för hela sidan: svart bakgrund, vit text och läsbar "standardfont". */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+/* Använder "standardfont" i formulärets knappar och textfält. */
+button,
+input {
+  font: inherit;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+/* Begränsar appens bredd och centrerar den horisontellt på sidan. */
+.todo-app {
+  width: min(100% - 2rem, 42rem);
+  margin: 0 auto;
+  padding: 3rem 0;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* Rubriken centreras och får en responsiv storlek som anpassas efter skärmens bredd, "handskriftsfont" används. */
+.todo-app h1 {
+  margin: 0 0 2rem;
+  color: #fff;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-family: "Rock Salt", cursive;
+  font-weight: 400;
+  text-align: center;
 }
 
-.ticks {
-  position: relative;
+/* Lägger inputfältet och knappen bredvid varandra på större skärmar. */
+.todo-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Låter etiketten sträcka sig över hela formulärets bredd. */
+.todo-form label {
+  grid-column: 1 / -1;
+  color: #d7d7d7;
+  font-weight: 700;
+}
+
+/* Utseende för textfältet där en ny uppgift skrivs in. */
+.todo-form input {
   width: 100%;
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  border: 2px solid #555;
+  border-radius: 0.5rem;
+  background-color: #1a1a1a;
+  color: #fff;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+/* Gör platshållartexten ljusgrå, för att vara "diskret". */
+.todo-form input::placeholder {
+  color: #999;
+}
+
+/* Visar tydligt vilket fält som är aktivt när användaren skriver. */
+.todo-form input:focus {
+  border-color: #75d47b;
+  outline: 2px solid #75d47b;
+  outline-offset: 2px;
+}
+
+/* Gemensamt grundutseende för alla knappar i appen. */
+button {
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.1rem;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Ändrar knappens färg när muspekaren hålls över den. */
+button:hover {
+  background-color: #d7d7d7;
+}
+
+/* Rutan som innehåller alla todo-uppgifter. */
+.todo-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background-color: #198754;
+  list-style: none;
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 35%);
+}
+
+/* Layout och färg för varje enskild uppgift i listan, annan "handskriftsfont" än i rfubriken, som passar bättre här */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.6rem;
+  background-color: #126b42;
+  color: #fff;
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+}
+
+/* Placerar checkboxen och uppgiftens text bredvid varandra. */
+.todo-item label {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+/* Gör att mycket lång uppgiftstext bryts i stället för att gå utanför rutan. */
+.todo-item label span {
+  overflow-wrap: anywhere;
+}
+
+/* Storlek och färg för checkboxen som markerar en uppgift som klar. */
+.todo-item input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  accent-color: #000;
+  cursor: pointer;
+}
+
+/* Visar slutförda uppgifter med genomstruken och ljusare text. */
+.todo-item.completed label span {
+  color: #b7d8c4;
+  text-decoration: line-through;
+}
+
+/* Gör raderingsknappen svart så att den syns tydligt mot den gröna bakgrunden. */
+.todo-item button {
+  flex: 0 0 auto;
+  padding: 0.55rem 0.8rem;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Ljusar upp raderingsknappen när muspekaren hålls över den. */
+.todo-item button:hover {
+  background-color: #292929;
+}
+
+/* Anpassar layouten för små skärmar/mobiltelefoner. */
+@media (max-width: 480px) {
+  /* Använder mindre marginaler så att appen får plats på smala skärmar. */
+  .todo-app {
+    width: min(100% - 1rem, 42rem);
+    padding: 2rem 0;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  /* Staplar inputfältet och knappen i stället för att sätta dem bredvid varandra. */
+  .todo-form {
+    grid-template-columns: 1fr;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  /* Låter knappen fylla hela radens bredd på mobil. */
+  .todo-form button {
+    width: 100%;
+  }
+
+  /* Minskar listans inre marginaler på små skärmar. */
+  .todo-list {
+    padding: 0.75rem;
+  }
+
+  /* Staplar uppgiftens text och raderingsknapp på små skärmar. */
+  .todo-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  /* Placerar raderingsknappen till höger även när uppgiften är staplad. */
+  .todo-item button {
+    align-self: flex-end;
   }
 }
